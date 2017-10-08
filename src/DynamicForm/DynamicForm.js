@@ -28,63 +28,57 @@ const FIELD_MAP = {
   checkbox: DynamicCheckbox
 };
 
-class _DynamicForm extends Component<DynamicFormProps, any> {
-  render() {
-    const {
-      values,
-      touched,
-      errors,
-      dirty,
-      isSubmitting,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      handleReset,
-      config
-    } = this.props;
-    return (
-      <form onSubmit={handleSubmit}>
-        {config.map((field, index) => {
-          const FieldComponent: StatelessFunctionalComponent<
-            FieldComponentProps<any>
-          > =
-            FIELD_MAP[field.fieldType];
-          return (
-            <div className="form-group" key={index}>
-              <label className="control-label">
-                {field.label}
-                <FieldComponent
-                  className="form-control"
-                  name={field.name}
-                  value={values[field.name]}
-                  fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </label>
-              {touched[field.name] &&
-                errors[field.name] && <div>{errors[field.name]}</div>}
-            </div>
-          );
-        })}
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          Submit
-        </button>
-        <button
-          className="btn btn-default pull-right"
-          type="button"
-          onClick={handleReset}
-        >
-          Reset
-        </button>
-      </form>
-    );
-  }
-}
+const _DynamicForm = (props: DynamicFormProps) => {
+  const {
+    values,
+    touched,
+    errors,
+    dirty,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    handleReset,
+    config
+  } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      {config.map((field, index) => {
+        const FieldComponent: StatelessFunctionalComponent<
+          FieldComponentProps<any>
+        > =
+          FIELD_MAP[field.fieldType];
+        return (
+          <div className="form-group" key={index}>
+            <label className="control-label">
+              {field.label}
+              <FieldComponent
+                className="form-control"
+                name={field.name}
+                value={values[field.name]}
+                fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </label>
+            {touched[field.name] &&
+              errors[field.name] && <div>{errors[field.name]}</div>}
+          </div>
+        );
+      })}
+      <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+        Submit
+      </button>
+      <button
+        className="btn btn-default pull-right"
+        type="button"
+        onClick={handleReset}
+      >
+        Reset
+      </button>
+    </form>
+  );
+};
 
 const formikEnhancer = withFormik({
   validate: (values, props) => {
