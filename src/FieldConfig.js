@@ -45,5 +45,14 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     fieldTypeConfiguration: {
       options: ["First", "Second", "Third"]
     }
+  },
+  {
+    label: "Test Radio",
+    name: "testRadio",
+    value: "",
+    fieldType: "radio",
+    fieldTypeConfiguration: {
+      options: ["One", "Two", "Three"]
+    }
   }
 ];

@@ -20,4 +20,4 @@ export interface FieldConfiguration<TFieldTypeConfiguration> {
   fieldTypeConfiguration?: TFieldTypeConfiguration;
 }
 
-type FieldType = "input" | "checkbox" | "select";
+type FieldType = "input" | "checkbox" | "select" | "radio";
