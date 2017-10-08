@@ -6,6 +6,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
   {
     label: "Email",
     name: "email",
+    value: "",
     fieldType: "input",
     validators: ["required"],
     fieldTypeConfiguration: {
@@ -16,6 +17,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
   {
     label: "Password",
     name: "password",
+    value: "",
     fieldType: "input",
     validators: ["required"],
     fieldTypeConfiguration: {
@@ -26,8 +28,8 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
   {
     label: "Remember Me",
     name: "rememberMe",
-    fieldType: "checkbox",
     value: false,
+    fieldType: "checkbox",
     // validators: ["required"],
     fieldTypeConfiguration: {
       // placeholder: "What's your first name?",

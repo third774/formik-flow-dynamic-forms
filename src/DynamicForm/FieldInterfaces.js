@@ -15,7 +15,7 @@ export interface FieldConfiguration<TFieldTypeConfiguration> {
   label: string;
   name: string;
   fieldType: FieldType;
-  value?: any;
+  value: any;
   validators?: ValidatorTypes[];
   fieldTypeConfiguration?: TFieldTypeConfiguration;
 }
