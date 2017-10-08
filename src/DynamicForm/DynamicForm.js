@@ -8,6 +8,8 @@ import { Validators } from "./Validators";
 import { DynamicInput } from "./dynamic-input-components/DynamicInput";
 import { DynamicCheckbox } from "./dynamic-input-components/DynamicCheckbox";
 
+import type { StatelessFunctionalComponent } from "react";
+
 type DynamicFormProps = {
   values: any,
   touched: any,
@@ -30,25 +32,29 @@ class _DynamicForm extends Component<DynamicFormProps, any> {
   render() {
     const {
       values,
-      // touched,
+      touched,
       errors,
-      // dirty,
+      dirty,
       isSubmitting,
       handleChange,
       handleBlur,
       handleSubmit,
-      // handleReset,
+      handleReset,
       config
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         {config.map((field, index) => {
-          const FieldComponent = FIELD_MAP[field.fieldType];
+          const FieldComponent: StatelessFunctionalComponent<
+            FieldComponentProps<any>
+          > =
+            FIELD_MAP[field.fieldType];
           return (
-            <div key={index}>
-              <label>
+            <div className="form-group" key={index}>
+              <label className="control-label">
                 {field.label}
                 <FieldComponent
+                  className="form-control"
                   name={field.name}
                   value={values[field.name]}
                   fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
@@ -56,12 +62,24 @@ class _DynamicForm extends Component<DynamicFormProps, any> {
                   onBlur={handleBlur}
                 />
               </label>
-              {errors[field.name] && <div>{errors[field.name]}</div>}
+              {touched[field.name] &&
+                errors[field.name] && <div>{errors[field.name]}</div>}
             </div>
           );
         })}
-        <button type="submit" disabled={isSubmitting}>
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={isSubmitting}
+        >
           Submit
+        </button>
+        <button
+          className="btn btn-default pull-right"
+          type="button"
+          onClick={handleReset}
+        >
+          Reset
         </button>
       </form>
     );

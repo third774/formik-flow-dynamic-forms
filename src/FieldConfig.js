@@ -10,7 +10,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     validators: ["required"],
     fieldTypeConfiguration: {
       placeholder: "jane.doe@email.com",
-      type: "email"
+      inputType: "email"
     }
   },
   {
@@ -20,7 +20,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     validators: ["required"],
     fieldTypeConfiguration: {
       placeholder: "Password",
-      type: "password"
+      inputType: "password"
     }
   },
   {

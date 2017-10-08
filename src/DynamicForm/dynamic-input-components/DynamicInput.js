@@ -12,9 +12,17 @@ type InputFieldTypeConfiguration = {
 export const DynamicInput = (
   props: FieldComponentProps<InputFieldTypeConfiguration>
 ) => {
-  const { name, value, fieldTypeConfiguration, onChange, onBlur } = props;
+  const {
+    name,
+    value,
+    fieldTypeConfiguration,
+    onChange,
+    onBlur,
+    className
+  } = props;
   return (
     <input
+      className={className}
       value={value}
       name={name}
       placeholder={fieldTypeConfiguration.placeholder}

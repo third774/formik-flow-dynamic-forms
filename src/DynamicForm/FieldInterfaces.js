@@ -5,6 +5,7 @@ import type { ValidatorTypes } from "./Validators";
 export interface FieldComponentProps<TFieldTypeConfiguration> {
   name: string;
   value: any;
+  className: string;
   onChange?: () => any;
   onBlur?: () => any;
   fieldTypeConfiguration: TFieldTypeConfiguration;
