@@ -7,6 +7,7 @@ import { FieldConfiguration, FieldComponentProps } from "./FieldInterfaces";
 import { Validators } from "./Validators";
 import { DynamicInput } from "./dynamic-input-components/DynamicInput";
 import { DynamicCheckbox } from "./dynamic-input-components/DynamicCheckbox";
+import { DynamicSelect } from "./dynamic-input-components/DynamicSelect";
 
 import type { StatelessFunctionalComponent } from "react";
 
@@ -25,7 +26,8 @@ type DynamicFormProps = {
 
 const FIELD_MAP = {
   input: DynamicInput,
-  checkbox: DynamicCheckbox
+  checkbox: DynamicCheckbox,
+  select: DynamicSelect
 };
 
 const _DynamicForm = (props: DynamicFormProps) => {

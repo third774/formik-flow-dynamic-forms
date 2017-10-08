@@ -35,5 +35,14 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
       // placeholder: "What's your first name?",
       // type: "text"
     }
+  },
+  {
+    label: "Test Dropdown",
+    name: "testDropdown",
+    value: "",
+    fieldType: "select",
+    fieldTypeConfiguration: {
+      options: ["First", "Second", "Third"]
+    }
   }
 ];
