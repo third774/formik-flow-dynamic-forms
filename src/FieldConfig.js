@@ -8,7 +8,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "email",
     value: "",
     fieldType: "input",
-    validators: ["required"],
+    validators: ["required", "email"],
     fieldTypeConfiguration: {
       placeholder: "jane.doe@email.com",
       inputType: "email"

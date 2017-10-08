@@ -13,6 +13,7 @@ class App extends Component<any, any> {
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
             <fieldset>
+              <legend>Login</legend>
               <DynamicForm config={FIELD_CONFIG} />
             </fieldset>
           </div>
