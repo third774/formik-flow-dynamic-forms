@@ -41,6 +41,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "testDropdown",
     value: "",
     fieldType: "select",
+    validators: ["required"],
     fieldTypeConfiguration: {
       options: ["First", "Second", "Third"]
     }
