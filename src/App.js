@@ -6,7 +6,7 @@ import "./App.css";
 import { DynamicForm } from "./DynamicForm/DynamicForm";
 import { FIELD_CONFIG } from "./FieldConfig";
 
-class App extends Component {
+class App extends Component<any, any> {
   render() {
     return (
       <div className="container">

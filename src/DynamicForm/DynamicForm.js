@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from "react";
+import { withFormik } from "formik";
 
-import { FieldConfiguration } from "./FieldInterfaces";
+import { FieldConfiguration, FieldComponentProps } from "./FieldInterfaces";
+import { Validators } from "./Validators";
 import { DynamicInput } from "./dynamic-input-components/DynamicInput";
 import { DynamicCheckbox } from "./dynamic-input-components/DynamicCheckbox";
-import { withFormik } from "formik";
-import { Validators } from "./Validators";
 
 type DynamicFormProps = {
   values: any,
@@ -26,7 +26,7 @@ const FIELD_MAP = {
   checkbox: DynamicCheckbox
 };
 
-class _DynamicForm extends Component<any, DynamicFormProps, any> {
+class _DynamicForm extends Component<DynamicFormProps, any> {
   render() {
     const {
       values,
@@ -46,14 +46,16 @@ class _DynamicForm extends Component<any, DynamicFormProps, any> {
           const FieldComponent = FIELD_MAP[field.fieldType];
           return (
             <div key={index}>
-              <label>{field.label}</label>
-              <FieldComponent
-                name={field.name}
-                value={values[field.name]}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                {...field}
-              />
+              <label>
+                {field.label}
+                <FieldComponent
+                  name={field.name}
+                  value={values[field.name]}
+                  fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </label>
               {errors[field.name] && <div>{errors[field.name]}</div>}
             </div>
           );

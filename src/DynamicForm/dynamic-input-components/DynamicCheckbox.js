@@ -2,19 +2,17 @@
 
 import React from "react";
 
-import { FieldComponent } from "../FieldInterfaces";
+import { FieldComponentProps } from "../FieldInterfaces";
 
-export const DynamicCheckbox = ({
-  name,
-  value,
-  onChange,
-  onBlur
-}: FieldComponent<any>) => (
-  <input
-    type="checkbox"
-    name={name}
-    checked={!!value}
-    onChange={onChange}
-    onBlur={onBlur}
-  />
-);
+export const DynamicCheckbox = (props: FieldComponentProps<any>) => {
+  const { name, value, onChange, onBlur } = props;
+  return (
+    <input
+      type="checkbox"
+      name={name}
+      checked={!!value}
+      onChange={onChange}
+      onBlur={onBlur}
+    />
+  );
+};

@@ -2,10 +2,12 @@
 
 import type { ValidatorTypes } from "./Validators";
 
-export interface FieldComponent<TFieldTypeConfiguration>
-  extends FieldConfiguration<TFieldTypeConfiguration> {
+export interface FieldComponentProps<TFieldTypeConfiguration> {
+  name: string;
+  value: any;
   onChange?: () => any;
   onBlur?: () => any;
+  fieldTypeConfiguration: TFieldTypeConfiguration;
 }
 
 export interface FieldConfiguration<TFieldTypeConfiguration> {

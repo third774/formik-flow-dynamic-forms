@@ -2,21 +2,25 @@
 
 import React from "react";
 
-import { FieldComponent } from "../FieldInterfaces";
+import { FieldComponentProps } from "../FieldInterfaces";
 
-export const DynamicInput = ({
-  name,
-  value,
-  fieldTypeConfiguration,
-  onChange,
-  onBlur
-}: FieldComponent<any>) => (
-  <input
-    value={value}
-    name={name}
-    placeholder={fieldTypeConfiguration && fieldTypeConfiguration.placeholder}
-    type={fieldTypeConfiguration && fieldTypeConfiguration.type}
-    onChange={onChange}
-    onBlur={onBlur}
-  />
-);
+type InputFieldTypeConfiguration = {
+  placeholder: string,
+  inputType: string
+};
+
+export const DynamicInput = (
+  props: FieldComponentProps<InputFieldTypeConfiguration>
+) => {
+  const { name, value, fieldTypeConfiguration, onChange, onBlur } = props;
+  return (
+    <input
+      value={value}
+      name={name}
+      placeholder={fieldTypeConfiguration.placeholder}
+      type={fieldTypeConfiguration.inputType}
+      onChange={onChange}
+      onBlur={onBlur}
+    />
+  );
+};
