@@ -9,8 +9,10 @@ import {DynamicInput} from "./dynamic-input-components/DynamicInput"
 import {DynamicCheckbox} from "./dynamic-input-components/DynamicCheckbox"
 import {DynamicSelect} from "./dynamic-input-components/DynamicSelect"
 import {DynamicRadio} from "./dynamic-input-components/DynamicRadio"
+import {DynamicTextArea} from "./dynamic-input-components/DynamicTextArea"
+import {DynamicMultiCheckbox} from "./dynamic-input-components/DynamicMultiCheckbox"
 
-import type {StatelessFunctionalComponent} from "react"
+import type {StatelessFunctionalComponent, ComponentType} from "react"
 
 type DynamicFormProps = {
   values: any,
@@ -29,7 +31,9 @@ const FIELD_MAP = {
   input: DynamicInput,
   checkbox: DynamicCheckbox,
   select: DynamicSelect,
-  radio: DynamicRadio
+  radio: DynamicRadio,
+  textarea: DynamicTextArea,
+  multicheckbox: DynamicMultiCheckbox
 }
 
 const _DynamicForm = (props: DynamicFormProps) => {
@@ -48,7 +52,9 @@ const _DynamicForm = (props: DynamicFormProps) => {
   return (
     <form onSubmit={handleSubmit}>
       {config.map((field, index) => {
-        const FieldComponent: StatelessFunctionalComponent<FieldComponentProps<any>> =
+        const FieldComponent:
+          | StatelessFunctionalComponent<FieldComponentProps<any>>
+          | ComponentType<FieldComponentProps<any>> =
           FIELD_MAP[field.fieldType]
         return (
           <div className="form-group" key={index}>

@@ -6,8 +6,8 @@ export interface FieldComponentProps<TFieldTypeConfiguration> {
   name: string;
   value: any;
   className: string;
-  onChange?: () => any;
-  onBlur?: () => any;
+  onChange: (e: any, value?: any) => any | void;
+  onBlur: () => any;
   fieldTypeConfiguration: TFieldTypeConfiguration;
 }
 
@@ -20,4 +20,4 @@ export interface FieldConfiguration<TFieldTypeConfiguration> {
   fieldTypeConfiguration?: TFieldTypeConfiguration;
 }
 
-type FieldType = "input" | "checkbox" | "select" | "radio"
+type FieldType = "input" | "checkbox" | "select" | "radio" | "textarea" | "multicheckbox"

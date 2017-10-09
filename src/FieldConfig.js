@@ -29,12 +29,8 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     label: "Remember Me",
     name: "rememberMe",
     value: false,
-    fieldType: "checkbox",
+    fieldType: "checkbox"
     // validators: ["required"],
-    fieldTypeConfiguration: {
-      // placeholder: "What's your first name?",
-      // type: "text"
-    }
   },
   {
     label: "How did you hear about us?",
@@ -49,11 +45,29 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
   {
     label: "Preferred Contact Method",
     name: "preferredContactMethod",
-    value: "email",
+    value: "",
     fieldType: "radio",
     validators: ["required"],
     fieldTypeConfiguration: {
       options: ["email", "phone", "snail mail"]
     }
+  },
+  {
+    label: "Tell us about yourself",
+    name: "tellUsAboutYourself",
+    value: "",
+    fieldType: "textarea",
+    fieldTypeConfiguration: {
+      placeholder: "I like long walks on the beach..."
+    }
   }
+  // {
+  //   label: "Allowed Contact Methods",
+  //   name: "allowedContactMethods",
+  //   value: [],
+  //   fieldType: "multicheckbox",
+  //   fieldTypeConfiguration: {
+  //     options: ["email", "phone", "snail mail"]
+  //   }
+  // }
 ]
