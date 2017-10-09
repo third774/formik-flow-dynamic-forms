@@ -15,7 +15,13 @@ export const DynamicRadio = (props: FieldComponentProps<RadioFieldTypeConfigurat
       {fieldTypeConfiguration.options.map((option, index) => (
         <label key={index}>
           {option}
-          <input type="radio" name={name} value={option} onChange={onChange} onBlur={onBlur} />
+          <input
+            type="radio"
+            name={name}
+            value={option}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
         </label>
       ))}
     </div>
