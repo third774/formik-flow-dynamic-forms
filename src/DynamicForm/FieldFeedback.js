@@ -5,20 +5,20 @@ import React, {Component} from "react"
 type FieldFeedbackProps = {
   error: string,
   touched: boolean,
-  hasFocus: boolean,
+  dirty: boolean,
   name: string,
   value: any
 }
 
-export class FieldFeedback extends Component<FieldFeedbackProps, any> {
+export class FieldFeedback extends Component<FieldFeedbackProps, {debounceTimer: any}> {
   state = {
     debounceTimer: null
   }
 
   componentWillReceiveProps(nextProps: FieldFeedbackProps) {
     clearTimeout(this.state.debounceTimer)
-    // Is still focused and the value has changed
-    if (nextProps.hasFocus && nextProps.value !== this.props.value) {
+    // value has changed
+    if (nextProps.value !== this.props.value) {
       const debounceTimer = setTimeout(() => {
         this.setState({debounceTimer: null})
       }, 500)
@@ -33,16 +33,10 @@ export class FieldFeedback extends Component<FieldFeedbackProps, any> {
   }
 
   render() {
-    const {error, hasFocus, touched} = this.props
+    const {error, touched, dirty} = this.props
     const {debounceTimer} = this.state
-    return touched && error && !debounceTimer ? (
+    return error && ((touched && !debounceTimer) || (dirty && !debounceTimer)) ? (
       <div style={{color: "red"}}>{error}</div>
     ) : null
-    // return (
-    //   <div>
-    //     <div>Has Focus: {hasFocus.toString()}</div>
-    //     {touched && error && !debounceTimer && <div style={{color: "red"}}>{error}</div>}
-    //   </div>
-    // )
   }
 }

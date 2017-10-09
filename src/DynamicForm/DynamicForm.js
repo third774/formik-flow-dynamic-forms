@@ -28,6 +28,12 @@ type DynamicFormProps = {
   config: FieldConfiguration<any>[]
 }
 
+type DynamicFormState = {
+  dirtyFields: {
+    [key: string]: boolean
+  }
+}
+
 const FIELD_MAP = {
   input: DynamicInput,
   checkbox: DynamicCheckbox,
@@ -37,22 +43,23 @@ const FIELD_MAP = {
   multicheckbox: DynamicMultiCheckbox
 }
 
-class _DynamicForm extends Component<
-  DynamicFormProps,
-  {focusedFieldName: string | null}
-> {
+class _DynamicForm extends Component<DynamicFormProps, DynamicFormState> {
   state = {
-    focusedFieldName: null
+    dirtyFields: {}
   }
 
-  handleFocus = e => {
-    const focusedFieldName = e.target.name
-    this.setState({focusedFieldName})
+  handleReset = () => {
+    this.setState({dirtyFields: {}})
+    this.props.handleReset()
   }
 
-  handleBlur = e => {
-    const focusedFieldName = null
-    this.setState({focusedFieldName})
+  handleChange = e => {
+    this.setState({
+      dirtyFields: {
+        ...this.state.dirtyFields,
+        [e.target.name]: true
+      }
+    })
   }
 
   render() {
@@ -67,9 +74,9 @@ class _DynamicForm extends Component<
       handleReset,
       config
     } = this.props
-    const {focusedFieldName} = this.state
+    const {focusedFieldName, dirtyFields} = this.state
     return (
-      <form onSubmit={handleSubmit} onFocus={this.handleFocus} onBlur={this.handleBlur}>
+      <form onSubmit={handleSubmit} onChange={this.handleChange}>
         {config.map((field, index) => {
           const FieldComponent:
             | StatelessFunctionalComponent<FieldComponentProps<any>>
@@ -92,7 +99,7 @@ class _DynamicForm extends Component<
                 touched={touched[field.name]}
                 value={values[field.name]}
                 error={errors[field.name]}
-                hasFocus={focusedFieldName === field.name}
+                dirty={dirtyFields[field.name]}
                 name={field.name}
               />
             </div>
@@ -104,7 +111,7 @@ class _DynamicForm extends Component<
         <button
           className="btn btn-default pull-right"
           type="button"
-          onClick={handleReset}
+          onClick={this.handleReset}
         >
           Reset
         </button>
