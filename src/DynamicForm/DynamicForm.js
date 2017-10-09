@@ -1,16 +1,16 @@
 // @flow
 
-import React, { Component } from "react";
-import { withFormik } from "formik";
+import React, {Component} from "react"
+import {withFormik} from "formik"
 
-import { FieldConfiguration, FieldComponentProps } from "./FieldInterfaces";
-import { Validators } from "./Validators";
-import { DynamicInput } from "./dynamic-input-components/DynamicInput";
-import { DynamicCheckbox } from "./dynamic-input-components/DynamicCheckbox";
-import { DynamicSelect } from "./dynamic-input-components/DynamicSelect";
-import { DynamicRadio } from "./dynamic-input-components/DynamicRadio";
+import {FieldConfiguration, FieldComponentProps} from "./FieldInterfaces"
+import {Validators} from "./Validators"
+import {DynamicInput} from "./dynamic-input-components/DynamicInput"
+import {DynamicCheckbox} from "./dynamic-input-components/DynamicCheckbox"
+import {DynamicSelect} from "./dynamic-input-components/DynamicSelect"
+import {DynamicRadio} from "./dynamic-input-components/DynamicRadio"
 
-import type { StatelessFunctionalComponent } from "react";
+import type {StatelessFunctionalComponent} from "react"
 
 type DynamicFormProps = {
   values: any,
@@ -23,14 +23,14 @@ type DynamicFormProps = {
   handleSubmit: () => any,
   handleReset: () => any,
   config: FieldConfiguration<any>[]
-};
+}
 
 const FIELD_MAP = {
   input: DynamicInput,
   checkbox: DynamicCheckbox,
   select: DynamicSelect,
   radio: DynamicRadio
-};
+}
 
 const _DynamicForm = (props: DynamicFormProps) => {
   const {
@@ -44,14 +44,12 @@ const _DynamicForm = (props: DynamicFormProps) => {
     handleSubmit,
     handleReset,
     config
-  } = props;
+  } = props
   return (
     <form onSubmit={handleSubmit}>
       {config.map((field, index) => {
-        const FieldComponent: StatelessFunctionalComponent<
-          FieldComponentProps<any>
-        > =
-          FIELD_MAP[field.fieldType];
+        const FieldComponent: StatelessFunctionalComponent<FieldComponentProps<any>> =
+          FIELD_MAP[field.fieldType]
         return (
           <div className="form-group" key={index}>
             <label className="control-label">
@@ -65,62 +63,55 @@ const _DynamicForm = (props: DynamicFormProps) => {
                 onBlur={handleBlur}
               />
             </label>
-            {touched[field.name] &&
-              errors[field.name] && <div>{errors[field.name]}</div>}
+            {touched[field.name] && errors[field.name] && <div>{errors[field.name]}</div>}
           </div>
-        );
+        )
       })}
       <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
         Submit
       </button>
-      <button
-        className="btn btn-default pull-right"
-        type="button"
-        onClick={handleReset}
-      >
+      <button className="btn btn-default pull-right" type="button" onClick={handleReset}>
         Reset
       </button>
     </form>
-  );
-};
+  )
+}
 
 const formikEnhancer = withFormik({
   validate: (values, props) => {
-    const config: FieldConfiguration<any>[] = props.config;
-    const errors = {};
+    const config: FieldConfiguration<any>[] = props.config
+    const errors = {}
     config.forEach(field => {
       if (field.validators) {
-        const firstBrokenValidationRule = field.validators.find(
-          validatorName => {
-            return Validators[validatorName](values[field.name], field.label);
-          }
-        );
+        const firstBrokenValidationRule = field.validators.find(validatorName => {
+          return Validators[validatorName](values[field.name], field.label)
+        })
         if (firstBrokenValidationRule) {
           errors[field.name] = Validators[firstBrokenValidationRule](
             values[field.name],
             field.label
-          );
+          )
         }
       }
-    });
-    return errors;
+    })
+    return errors
   },
 
   mapPropsToValues: props => {
-    const config: FieldConfiguration<any>[] = props.config;
+    const config: FieldConfiguration<any>[] = props.config
     const values = config.reduce(
       (acc, field) => ({
         ...acc,
         [field.name]: field.value
       }),
       {}
-    );
-    return values;
+    )
+    return values
   },
-  handleSubmit: (payload, { setSubmitting }) => {
-    console.log(payload);
-    setSubmitting(false);
+  handleSubmit: (payload, {setSubmitting}) => {
+    console.log(payload)
+    setSubmitting(false)
   }
-});
+})
 
-export const DynamicForm = formikEnhancer(_DynamicForm);
+export const DynamicForm = formikEnhancer(_DynamicForm)

@@ -1,12 +1,12 @@
 // @flow
 
-import React, { Component } from "react";
-import "./App.css";
+import React, {Component} from "react"
+import "./App.css"
 
-import { DynamicForm } from "./DynamicForm/DynamicForm";
-import { FIELD_CONFIG } from "./FieldConfig";
+import {DynamicForm} from "./DynamicForm/DynamicForm"
+import {FIELD_CONFIG} from "./FieldConfig"
 
-import ReactJson from "react-json-view";
+import ReactJson from "react-json-view"
 
 class App extends Component<any, any> {
   render() {
@@ -24,8 +24,8 @@ class App extends Component<any, any> {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,6 +1,6 @@
 // @flow
 
-import type { ValidatorTypes } from "./Validators";
+import type {ValidatorTypes} from "./Validators"
 
 export interface FieldComponentProps<TFieldTypeConfiguration> {
   name: string;
@@ -20,4 +20,4 @@ export interface FieldConfiguration<TFieldTypeConfiguration> {
   fieldTypeConfiguration?: TFieldTypeConfiguration;
 }
 
-type FieldType = "input" | "checkbox" | "select" | "radio";
+type FieldType = "input" | "checkbox" | "select" | "radio"
