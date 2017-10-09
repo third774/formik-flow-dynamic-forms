@@ -126,13 +126,18 @@ const formikEnhancer = withFormik({
     const errors = {}
     config.forEach(field => {
       if (field.validators) {
-        const firstBrokenValidationRule = field.validators.find(validatorName => {
-          return Validators[validatorName](values[field.name], field.label)
+        const firstBrokenValidationRule = field.validators.find(validatorConfig => {
+          return Validators[validatorConfig.validatorType](
+            values[field.name],
+            field.label,
+            ...[validatorConfig.validatorArgs]
+          )
         })
         if (firstBrokenValidationRule) {
-          errors[field.name] = Validators[firstBrokenValidationRule](
+          errors[field.name] = Validators[firstBrokenValidationRule.validatorType](
             values[field.name],
-            field.label
+            field.label,
+            ...[firstBrokenValidationRule.validatorArgs]
           )
         }
       }

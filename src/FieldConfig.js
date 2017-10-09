@@ -8,7 +8,14 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "email",
     value: "",
     fieldType: "input",
-    validators: ["required", "email"],
+    validators: [
+      {
+        validatorType: "required"
+      },
+      {
+        validatorType: "email"
+      }
+    ],
     fieldTypeConfiguration: {
       placeholder: "jane.doe@email.com",
       inputType: "email"
@@ -19,7 +26,15 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "password",
     value: "",
     fieldType: "input",
-    validators: ["required"],
+    validators: [
+      {
+        validatorType: "required"
+      },
+      {
+        validatorType: "minLength",
+        validatorArgs: [6]
+      }
+    ],
     fieldTypeConfiguration: {
       placeholder: "Password",
       inputType: "password"
@@ -37,7 +52,11 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "howDidYouHearAboutUs",
     value: "",
     fieldType: "select",
-    validators: ["required"],
+    validators: [
+      {
+        validatorType: "required"
+      }
+    ],
     fieldTypeConfiguration: {
       options: ["Friend", "Conference Talk", "Social Media"]
     }
@@ -47,7 +66,11 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "preferredContactMethod",
     value: "",
     fieldType: "radio",
-    validators: ["required"],
+    validators: [
+      {
+        validatorType: "required"
+      }
+    ],
     fieldTypeConfiguration: {
       options: ["email", "phone", "snail mail"]
     }
@@ -57,7 +80,11 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "tellUsAboutYourself",
     value: "",
     fieldType: "textarea",
-    validators: ["required"],
+    validators: [
+      {
+        validatorType: "required"
+      }
+    ],
     fieldTypeConfiguration: {
       placeholder: "I like long walks on the beach..."
     }

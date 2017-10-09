@@ -1,6 +1,6 @@
 // @flow
 
-import type {ValidatorTypes} from "./Validators"
+import type {ValidatorTypes, ValidatorConfig} from "./Validators"
 
 export interface FieldComponentProps<TFieldTypeConfiguration> {
   name: string;
@@ -16,7 +16,7 @@ export interface FieldConfiguration<TFieldTypeConfiguration> {
   name: string;
   fieldType: FieldType;
   value: any;
-  validators?: ValidatorTypes[];
+  validators?: ValidatorConfig[];
   fieldTypeConfiguration?: TFieldTypeConfiguration;
 }
 
