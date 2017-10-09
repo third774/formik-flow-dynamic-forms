@@ -19,6 +19,7 @@ export const DynamicRadio = (props: FieldComponentProps<RadioFieldTypeConfigurat
             type="radio"
             name={name}
             value={option}
+            checked={value === option}
             onChange={onChange}
             onBlur={onBlur}
           />
