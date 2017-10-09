@@ -1,6 +1,6 @@
 // @flow
 
-import { FieldConfiguration } from "./DynamicForm/FieldInterfaces";
+import {FieldConfiguration} from "./DynamicForm/FieldInterfaces"
 
 export const FIELD_CONFIG: FieldConfiguration<any>[] = [
   {
@@ -37,22 +37,23 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     }
   },
   {
-    label: "Test Dropdown",
-    name: "testDropdown",
+    label: "How did you hear about us?",
+    name: "howDidYouHearAboutUs",
     value: "",
     fieldType: "select",
     validators: ["required"],
     fieldTypeConfiguration: {
-      options: ["First", "Second", "Third"]
+      options: ["Friend", "Conference Talk", "Social Media"]
     }
   },
   {
-    label: "Test Radio",
-    name: "testRadio",
-    value: "",
+    label: "Preferred Contact Method",
+    name: "preferredContactMethod",
+    value: "email",
     fieldType: "radio",
+    validators: ["required"],
     fieldTypeConfiguration: {
-      options: ["One", "Two", "Three"]
+      options: ["email", "phone", "snail mail"]
     }
   }
-];
+]
