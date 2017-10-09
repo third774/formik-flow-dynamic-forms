@@ -1,6 +1,7 @@
 // @flow
 
 import React, {Component} from "react"
+import type {StatelessFunctionalComponent, ComponentType} from "react"
 import {withFormik} from "formik"
 
 import {FieldConfiguration, FieldComponentProps} from "./FieldInterfaces"
@@ -12,7 +13,7 @@ import {DynamicRadio} from "./dynamic-input-components/DynamicRadio"
 import {DynamicTextArea} from "./dynamic-input-components/DynamicTextArea"
 import {DynamicMultiCheckbox} from "./dynamic-input-components/DynamicMultiCheckbox"
 
-import type {StatelessFunctionalComponent, ComponentType} from "react"
+import {FieldFeedback} from "./FieldFeedback"
 
 type DynamicFormProps = {
   values: any,
@@ -36,51 +37,80 @@ const FIELD_MAP = {
   multicheckbox: DynamicMultiCheckbox
 }
 
-const _DynamicForm = (props: DynamicFormProps) => {
-  const {
-    values,
-    touched,
-    errors,
-    dirty,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset,
-    config
-  } = props
-  return (
-    <form onSubmit={handleSubmit}>
-      {config.map((field, index) => {
-        const FieldComponent:
-          | StatelessFunctionalComponent<FieldComponentProps<any>>
-          | ComponentType<FieldComponentProps<any>> =
-          FIELD_MAP[field.fieldType]
-        return (
-          <div className="form-group" key={index}>
-            <label className="control-label">
-              {field.label}
-              <FieldComponent
-                className="form-control"
-                name={field.name}
+class _DynamicForm extends Component<
+  DynamicFormProps,
+  {focusedFieldName: string | null}
+> {
+  state = {
+    focusedFieldName: null
+  }
+
+  handleFocus = e => {
+    const focusedFieldName = e.target.name
+    this.setState({focusedFieldName})
+  }
+
+  handleBlur = e => {
+    const focusedFieldName = null
+    this.setState({focusedFieldName})
+  }
+
+  render() {
+    const {
+      values,
+      touched,
+      errors,
+      isSubmitting,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      handleReset,
+      config
+    } = this.props
+    const {focusedFieldName} = this.state
+    return (
+      <form onSubmit={handleSubmit} onFocus={this.handleFocus} onBlur={this.handleBlur}>
+        {config.map((field, index) => {
+          const FieldComponent:
+            | StatelessFunctionalComponent<FieldComponentProps<any>>
+            | ComponentType<FieldComponentProps<any>> =
+            FIELD_MAP[field.fieldType]
+          return (
+            <div className="form-group" key={index}>
+              <label className="control-label">
+                {field.label}
+                <FieldComponent
+                  className="form-control"
+                  name={field.name}
+                  value={values[field.name]}
+                  fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </label>
+              <FieldFeedback
+                touched={touched[field.name]}
                 value={values[field.name]}
-                fieldTypeConfiguration={field.fieldTypeConfiguration || {}}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                error={errors[field.name]}
+                hasFocus={focusedFieldName === field.name}
+                name={field.name}
               />
-            </label>
-            {touched[field.name] && errors[field.name] && <div>{errors[field.name]}</div>}
-          </div>
-        )
-      })}
-      <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
-        Submit
-      </button>
-      <button className="btn btn-default pull-right" type="button" onClick={handleReset}>
-        Reset
-      </button>
-    </form>
-  )
+            </div>
+          )
+        })}
+        <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+          Submit
+        </button>
+        <button
+          className="btn btn-default pull-right"
+          type="button"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      </form>
+    )
+  }
 }
 
 const formikEnhancer = withFormik({

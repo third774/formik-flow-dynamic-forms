@@ -57,6 +57,7 @@ export const FIELD_CONFIG: FieldConfiguration<any>[] = [
     name: "tellUsAboutYourself",
     value: "",
     fieldType: "textarea",
+    validators: ["required"],
     fieldTypeConfiguration: {
       placeholder: "I like long walks on the beach..."
     }
