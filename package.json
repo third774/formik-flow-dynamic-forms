@@ -50,12 +50,20 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "gh-pages -d build",
-    "precommit": "./node_modules/prettier/bin/prettier.js --write **/*.js"
+    "prettier": "./node_modules/prettier/bin/prettier.js --write **/*.js",
+    "precommit": "npm run prettier"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run pretty",
+      "git add"
+    ]
   },
   "devDependencies": {
     "flow-bin": "^0.56.0",
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
     "prettier": "^1.7.4"
   },
   "jest": {
