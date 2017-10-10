@@ -50,8 +50,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "gh-pages -d build",
-    "prettier": "./node_modules/prettier/bin/prettier.js --write **/*.js",
-    "precommit": "npm run prettier"
+    "prettier": "./node_modules/prettier/bin/prettier.js --write **/*.js"
   },
   "lint-staged": {
     "*.js": [
